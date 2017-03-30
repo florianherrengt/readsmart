@@ -32,4 +32,8 @@ export class MenuPage {
     this.$menu.setSelectedItem(item)
     console.log('MenuPage:onSelectItem: ', item)
   }
+
+  getItems(event: Event) {
+    console.log(event.target)
+  }
 }
