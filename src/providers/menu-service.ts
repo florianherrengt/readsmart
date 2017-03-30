@@ -3,23 +3,37 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Subject} from 'rxjs'
 
-/*
-  Generated class for the MenuService provider.
+export enum ItemTypes {
+  Reddit,
+  Medium,
+  HackerNews,
+  RSS
+}
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
+export interface ItemJSON {
+  label: string,
+  type: ItemTypes
+}
+
 @Injectable()
 export class MenuService {
-  selectedItem: string
-  itemChanged: Subject<string> = new Subject<string>()
+  selectedItem: ItemJSON
+  items: ItemJSON[]
+  selectedItemChanged: Subject<ItemJSON> = new Subject<ItemJSON>()
   constructor(public http: Http) {
-    this.selectedItem = "javascript"
+    this.items = [{
+      label: 'news',
+      type: ItemTypes.Reddit
+    }, {
+      label: 'javascript',
+      type: ItemTypes.Reddit
+    }]
+    this.selectedItem = this.items[0]
   }
 
-  setSelectedItem(selectedItem) {
-    this.selectedItem = selectedItem
-    this.itemChanged.next(this.selectedItem)
-    console.log('MenuService:setSelectedItem:', selectedItem)
+  setSelectedItem(index) {
+    this.selectedItem = this.items[index]
+    this.selectedItemChanged.next(this.selectedItem)
+    console.log('MenuService:setSelectedItem:', this.selectedItem)
   }
 }
