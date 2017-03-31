@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 import { AddPage } from '../add/add';
-import {MenuService} from '../../providers/menu-service'
+import {MenuService, ItemJSON as MenuItemJSON, ItemTypes as MenuItemTypes} from '../../providers/menu-service'
 
 @Component({
   selector: 'page-menu',
   templateUrl: 'menu.html'
 })
 export class MenuPage {
+  labels: string[]
 
   constructor(
     public navCtrl: NavController,
@@ -16,7 +17,7 @@ export class MenuPage {
     public modalCtrl: ModalController,
     public $menu: MenuService
   ) {
-    this.$menu = $menu
+    this.labels = $menu.items.map(item => item.label)
   }
 
   ionViewDidLoad() {

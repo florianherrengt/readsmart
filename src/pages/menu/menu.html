@@ -9,18 +9,8 @@
 
 <ion-content>
   <ion-list>
-    <button (click)="onSelectItem('news')" ion-item>
-      News
-    </button>
-    <button (click)="onSelectItem('javascript')" ion-item>
-      Javascript
-    </button>
-    <button (click)="onSelectItem('python')" ion-item>
-      Python
-    </button>
-    <button (click)="presentModal()" ion-item>
-      <ion-icon name="add" item-left></ion-icon>
-        Add
+    <button *ngFor="let label of labels; let i = index" (click)="onSelectItem(i)" ion-item>
+      {{label}}
     </button>
   </ion-list>
 </ion-content>
